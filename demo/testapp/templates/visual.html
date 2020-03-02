@@ -1,0 +1,174 @@
+{% extends 'cruds/base.html' %}
+
+{% block content %}
+{% block title %}Pandas I/O, Bokeh and Matplotlib{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Bokeh Scatter Plots</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bokeh/1.0.1/bokeh.min.css" type="text/css"/>
+
+		<!--- Pretty tab code --->
+		{% load staticfiles %}
+		<link rel="stylesheet" type="text/css" href="{% static "sheels.css" %}" />
+
+
+		<script>
+$(document).ready(function() {
+	  
+    var numItems = $('li.fancyTab').length;
+	
+			  if (numItems == 12){
+					$("li.fancyTab").width('8.3%');
+				}
+			  if (numItems == 11){
+					$("li.fancyTab").width('9%');
+				}
+			  if (numItems == 10){
+					$("li.fancyTab").width('10%');
+				}
+			  if (numItems == 9){
+					$("li.fancyTab").width('11.1%');
+				}
+			  if (numItems == 8){
+					$("li.fancyTab").width('12.5%');
+				}
+			  if (numItems == 7){
+					$("li.fancyTab").width('14.2%');
+				}
+			  if (numItems == 6){
+					$("li.fancyTab").width('16.666666666666667%');
+				}
+			  if (numItems == 5){
+					$("li.fancyTab").width('20%');
+				}
+			  if (numItems == 4){
+					$("li.fancyTab").width('25%');
+				}
+			  if (numItems == 3){
+					$("li.fancyTab").width('33.3%');
+				}
+			  if (numItems == 2){
+					$("li.fancyTab").width('50%');
+				}
+		});
+
+$(window).load(function() {
+  $('.fancyTabs').each(function() {
+    var highestBox = 0;
+    $('.fancyTab a', this).each(function() {
+      if ($(this).height() > highestBox)
+        highestBox = $(this).height();
+    });
+    $('.fancyTab a', this).height(highestBox);
+  });
+});
+</script>
+
+	</head>
+	<body>
+
+<div class="container"> 
+<section id="fancyTabWidget" class="tabs t-tabs">
+        <ul class="nav nav-tabs fancyTabs" role="tablist">
+        
+                    <li class="tab fancyTab active">
+                    <div class="arrow-down"><div class="arrow-down-inner"></div></div>	
+                        <a id="tab0" href="#tabBody0" role="tab" aria-controls="tabBody0" aria-selected="true" data-toggle="tab" tabindex="0"><img src="https://tifosilinux.files.wordpress.com/2018/12/pandas.jpg" height='60px' width='120px' /><br><span class="hidden-xs">Pandas I/O</span></a>
+                    	<div class="whiteBlock"></div>
+                    </li>
+                    
+                    <li class="tab fancyTab">
+                    <div class="arrow-down"><div class="arrow-down-inner"></div></div>
+                        <a id="tab1" href="#tabBody1" role="tab" aria-controls="tabBody1" aria-selected="true" data-toggle="tab" tabindex="0"><span class="fa fa-google"></span><span class="hidden-xs">WordCloud Analysis</span></a>
+                        <div class="whiteBlock"></div>
+                    </li>
+                    
+			<li class="tab fancyTab">
+			<div class="arrow-down"><div class="arrow-down-inner"></div></div>
+				<a id="tab2" href="#tabBody2" role="tab" aria-controls="tabBody2" aria-selected="true" data-toggle="tab" tabindex="0"><img src="https://tifosilinux.files.wordpress.com/2018/12/bokeh.png" height='60px' width='60px' /><br><span class="hidden-xs">Bokeh</span></a>
+				<div class="whiteBlock"></div>
+			</li>
+                    
+                    <li class="tab fancyTab">
+                    <div class="arrow-down"><div class="arrow-down-inner"></div></div>
+                        <a id="tab3" href="#tabBody3" role="tab" aria-controls="tabBody3" aria-selected="true" data-toggle="tab" tabindex="0"><img src="https://tifosilinux.files.wordpress.com/2018/11/matplotlib.png" height='60px' width='165px' /><br></span><span class="hidden-xs">Matplotlib</span></a>
+                        <div class="whiteBlock"></div>
+                    </li> 
+                         
+                    <li class="tab fancyTab">
+                    <div class="arrow-down"><div class="arrow-down-inner"></div></div>
+                        <a id="tab4" href="#tabBody4" role="tab" aria-controls="tabBody4" aria-selected="true" data-toggle="tab" tabindex="0"><span class="fa fa-twitter"></span><span class="hidden-xs">My Tweet Length</span></a>
+                        <div class="whiteBlock"></div>
+                    </li>
+                    
+        </ul>
+        <div id="myTabContent" class="tab-content fancyTabContent" aria-live="polite">
+                    <div class="tab-pane  fade active in" id="tabBody0" role="tabpanel" aria-labelledby="tab0" aria-hidden="false" tabindex="0">
+                        <div>
+                        	<div class="row">
+                            	
+                                <div class="col-md-12">
+					<form method="POST" class="post-form" enctype="multipart/form-data">
+						{% csrf_token %}
+						{{ form.as_p }}
+						<button type="submit" class="save btn btn-primary">Save</button>
+					</form>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane  fade" id="tabBody1" role="tabpanel" aria-labelledby="tab1" aria-hidden="true" tabindex="0">
+                        <div class="row">
+                            	
+                                <div class="col-md-12">
+					<img src="data:image/png;base64,{{ htmllink }}" height="1010px" width="83%">
+                                </div>
+                            </div>
+                    </div>
+                    <div class="tab-pane  fade" id="tabBody2" role="tabpanel" aria-labelledby="tab2" aria-hidden="true" tabindex="0">
+                        <div class="row">
+                                <div class="col-md-12">
+					{{ div | safe }}
+					<script src="https://cdnjs.cloudflare.com/ajax/libs/bokeh/1.0.1/bokeh.min.js"></script>
+					{{ script | safe }}
+                                </div>
+                            </div>
+                    </div>
+                    <div class="tab-pane  fade" id="tabBody3" role="tabpanel" aria-labelledby="tab3" aria-hidden="true" tabindex="0">
+                    <div class="row">
+                        <div class="col-md-12">
+				{% load staticfiles %}
+				<img src="{% static "adult.png" %}" alt="Images Attached"/>
+                                </div>
+                            </div>
+                    </div>
+			
+
+                    <div class="tab-pane  fade" id="tabBody4" role="tabpanel" aria-labelledby="tab4" aria-hidden="true" tabindex="0">
+                    <div class="row">
+                        <div class="col-md-12">
+				<pre>
+					{{ grams }}
+				</pre>		
+                        </div>
+                    </div>
+                    </div>
+        </div>
+
+    </section>
+</div>
+
+
+				<td>
+					{{ div | safe }}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	</body>
+</html>
+{% endblock content %}

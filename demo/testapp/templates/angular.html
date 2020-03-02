@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html ng-app>
+	<head>
+		<title>Python - Pandas - Angular - Seaborn</title>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+		<script>
+			getavg(){
+  				this._http.get("/getavg?val=" + this.str1).map(r=>r.text()).subscribe(res => this.resavg= res)
+			  }
+		</script>
+	</head>
+	<body>
+		<input type="text" [(ngModel)]='str1'>
+		<button (click)="getAvg">Get Average</button>
+		<input type="text" value={{resavg}}>
+	</body>
+</html>

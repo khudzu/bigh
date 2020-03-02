@@ -1,0 +1,271 @@
+<!DOCTYPE html PUBLIC "-//W3C/DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+{% extends 'cruds/base.html' %}
+{% block content %}
+{% block title %}Django with AJAX{% endblock title %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>
+		Disini AJAX
+	</title>
+
+<!--- Pretty tab code --->
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static "sheels.css" %}" />
+
+<script>
+$(document).ready(function() {
+	  
+    var numItems = $('li.fancyTab').length;
+	
+			  if (numItems == 12){
+					$("li.fancyTab").width('8.3%');
+				}
+			  if (numItems == 11){
+					$("li.fancyTab").width('9%');
+				}
+			  if (numItems == 10){
+					$("li.fancyTab").width('10%');
+				}
+			  if (numItems == 9){
+					$("li.fancyTab").width('11.1%');
+				}
+			  if (numItems == 8){
+					$("li.fancyTab").width('12.5%');
+				}
+			  if (numItems == 7){
+					$("li.fancyTab").width('14.2%');
+				}
+			  if (numItems == 6){
+					$("li.fancyTab").width('16.666666666666667%');
+				}
+			  if (numItems == 5){
+					$("li.fancyTab").width('20%');
+				}
+			  if (numItems == 4){
+					$("li.fancyTab").width('25%');
+				}
+			  if (numItems == 3){
+					$("li.fancyTab").width('33.3%');
+				}
+			  if (numItems == 2){
+					$("li.fancyTab").width('50%');
+				}
+		});
+
+$(window).load(function() {
+  $('.fancyTabs').each(function() {
+    var highestBox = 0;
+    $('.fancyTab a', this).each(function() {
+      if ($(this).height() > highestBox)
+        highestBox = $(this).height();
+    });
+    $('.fancyTab a', this).height(highestBox);
+  });
+});
+</script>
+
+<!-------- Here we are code of AJAX ----------------->
+
+	<script language=javascript>
+		var objekXHR; // ini untuk deklarasi variabel objekXHR
+		var tipe=""; // untuk deklarasi tipe dan mengosongkannya
+
+		function buatobjekXHR(){
+			// fungsi untuk membuat objek XMLHttpRequest
+			if(window.ActiveXObject){
+				// Untuk IE
+				objekXHR = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if(window.XMLHttpRequest){
+				objekXHR = new XMLHttpRequest();
+			}
+			else{
+				alert("Ganti browser dengan yang support AJAX");
+			}
+		}
+
+		function cariJadwal(tipeJadwal){
+			/*Fungsi untuk mengambil jadwal dari server dan kemudian menampilkannya*/
+			/*Fungsi ini akan memangiil fungsi-fungsi lainnya*/
+			tipe = tipeJadwal;
+			buatobjekXHR();
+			objekXHR.onreadystatechange = pilihJenisJadwal;
+
+			// Berikut kode untk mengambil data dari file XML
+			{% load staticfiles %}
+			objekXHR.open("GET","{% static "data.xml" %}",true);
+			objekXHR.send(null);
+		}
+
+		function pilihJenisJadwal(){
+			/*Dekomposisi untuk melihat apakah tipe jadwal adalah keseluruhan atau hari tertentu*/
+			if(objekXHR.readyState == 4){
+				if(objekXHR.status == 200){
+					if(tipe == "senin"){
+						jadwalHarian("senin");
+					}
+					if(tipe == "selasa"){
+						jadwalHarian("selasa");
+					}
+					if(tipe == "rabu"){
+						jadwalHarian("rabu");
+					}
+					if(tipe == "kamis"){
+						jadwalHarian("kamis");
+					}
+					else if(tipe == "all"){
+						jadwalMingguan();
+					}
+				}
+			}
+		}
+	
+		function jadwalHarian(hari){
+			/*Fungsi ini untuk mem-parse data.xml guna menghasilkan data jadwal harian*/
+			var xmlDoc = objekXHR.responseXML;
+			var jadwalPerHari = xmlDoc.getElementsByTagName(hari)[0];
+			var detailPerHari = jadwalPerHari.getElementsByTagName("mapel");
+
+			// Kode untuk memanggil fungsi penjadwalan
+			tampilkanJadwal("<strong>Jadwal hari "+ hari +"</strong>",detailPerHari);
+		}
+
+		function jadwalMingguan(){
+			/*Fungsi ini untuk mem-parse data.xml guna menghasilkan data jadwal mingguan*/
+			var xmlDoc = objekXHR.responseXML;
+			var semuaPelajaran = xmlDoc.getElementsByTagName("mapel");
+			
+			tampilkanJadwal("<strong>Pelajaran satu minggu </strong>",semuaPelajaran);
+		}
+		
+		function tampilkanJadwal(namaHari,namaPelajaran){
+			// Menampilkan hasilnya di kotak DIV
+			var out = namaHari;
+			var pelajaran = null;
+
+			for(var i=0; i<namaPelajaran.length; i++){
+				pelajaran = namaPelajaran[i];
+				out = out + "<br />" + pelajaran.childNodes[0].nodeValue;
+			}
+			//alert(out);
+			document.getElementById('kotak').innerHTML=out;
+		}
+	</script>
+
+
+	<!--<script>
+		function sebutkanNama(nama){
+			window.alert("Hello "+nama);
+		}
+	</script>-->
+</head>
+<!--<body onclick="window.alert('Welcome tifosilinux')">-->
+<body>
+
+
+<div class="container"> 
+<section id="fancyTabWidget" class="tabs t-tabs">
+        <ul class="nav nav-tabs fancyTabs" role="tablist">
+        
+                    <li class="tab fancyTab active">
+                    <div class="arrow-down"><div class="arrow-down-inner"></div></div>	
+                        <a id="tab0" href="#tabBody0" role="tab" aria-controls="tabBody0" aria-selected="true" data-toggle="tab" tabindex="0"><span class="fa fa-desktop"></span><span class="hidden-xs">DOM and Transfer Data XML</span></a>
+                    	<div class="whiteBlock"></div>
+                    </li>
+                    
+                    <li class="tab fancyTab">
+                    <div class="arrow-down"><div class="arrow-down-inner"></div></div>
+                        <a id="tab1" href="#tabBody1" role="tab" aria-controls="tabBody1" aria-selected="true" data-toggle="tab" tabindex="0"><span class="fa fa-google"></span><span class="hidden-xs">Google gmplot</span></a>
+                        <div class="whiteBlock"></div>
+                    </li>
+                    
+			<li class="tab fancyTab">
+			<div class="arrow-down"><div class="arrow-down-inner"></div></div>
+				<a id="tab2" href="#tabBody2" role="tab" aria-controls="tabBody2" aria-selected="true" data-toggle="tab" tabindex="0"><img src="https://tifosilinux.files.wordpress.com/2018/12/laravel-developer.png" height='60px' width='60px' /><br><span class="hidden-xs">Discover Laravel</span></a>
+				<div class="whiteBlock"></div>
+			</li>
+                    
+                    <li class="tab fancyTab">
+                    <div class="arrow-down"><div class="arrow-down-inner"></div></div>
+			<a id="tab3" href="#tabBody3" role="tab" aria-controls="tabBody3" aria-selected="true" data-toggle="tab" tabindex="0"><img src="https://tifosilinux.files.wordpress.com/2018/12/odbc-servers_icon-1.png" height='60px' width='165px' /><br></span><span class="hidden-xs">Python ODBC</span></a>
+                        <div class="whiteBlock"></div>
+                    </li> 
+                         
+        </ul>
+        <div id="myTabContent" class="tab-content fancyTabContent" aria-live="polite">
+                    <div class="tab-pane  fade active in" id="tabBody0" role="tabpanel" aria-labelledby="tab0" aria-hidden="false" tabindex="0">
+                        <div>
+                        	<div class="row">
+                            	
+                                <div class="col-md-12">
+						<script language=javascript>
+							document.write("Hello Data Scientist"+"<br/>"+"Welcome<br><br>");
+							document.write("Nama browser : <strong>" + navigator.appName + "</strong><br/>");
+							document.write("Versi browser : <strong>" + navigator.appVersion + "</strong><br/>");
+							document.write("Nama User Agent : <strong>" + navigator.userAgent + "</strong><br/><br/>");
+						</script>
+
+						<h1>Weekly Schedule :</h1>
+						<br/><br/>
+						<form action="#">
+							<input type="button" value="Jadwal semua hari" onclick="cariJadwal('all');"/>
+							<input type="button" value="Jadwal hari senin" onclick="cariJadwal('senin');"/>
+							<input type="button" value="Jadwal hari selasa" onclick="cariJadwal('selasa');"/>
+							<input type="button" value="Jadwal hari rabu" onclick="cariJadwal('rabu');"/>
+							<input type="button" value="Jadwal hari kamis" onclick="cariJadwal('kamis');"/>
+						</form>
+						<br/>
+						<div id="kotak"><!==ini untuk menampilkan jadwal==></div>
+
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane  fade" id="tabBody1" role="tabpanel" aria-labelledby="tab1" aria-hidden="true" tabindex="0">
+                        <div class="row">
+                            	
+                                <div class="col-md-12">
+					<iframe width="100%" height="100%" src="http://192.168.75.145/testapp/gmplot/"></iframe>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="tab-pane  fade" id="tabBody2" role="tabpanel" aria-labelledby="tab2" aria-hidden="true" tabindex="0">
+                        <div class="row">
+                                <div class="col-md-12">
+                        			<h2>This is the content of tab three.</h2>
+                                		This is will be fill with Lavarel Content
+                                </div>
+                            </div>
+                    </div>
+                    <div class="tab-pane  fade" id="tabBody3" role="tabpanel" aria-labelledby="tab3" aria-hidden="true" tabindex="0">
+			<div class="row">
+				<div class="col-md-12">
+                                        <h3>For your information</h3><br/>
+                                        <u><b>/usr/bin/python: symbol lookup error: /usr/lib/x86_64-linux-gnu/odbc/libmyodbc.so: undefined symbol: strfill
+</b></u>
+                                        <br/>
+                                        This is obviously the packaging/building problem in Ubuntu.
+MySQL driver is not supposed to load mysql client shared library
+at all. Only the static linking can make sure the ODBC driver
+works properly because it depends on the particular
+implementations of client functions and header declarations.
+                                </div>
+			</div>
+                    </div>
+        </div>
+
+    </section>
+</div>
+
+
+	<!--<form>
+		<input type='text' id='teks'>
+		<input type='submit' value='say' onclick = sebutkanNama(teks.value)>
+	</form>-->
+
+
+</body>
+<html>
+{% endblock content %}

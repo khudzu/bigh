@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+<html lang="en">
+
+{% block content %}
+
+<head>
+        <title>Signup for Data Scientist</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load staticfiles %}
+        <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+</head>
+<body>
+
+<div class="limiter">
+                 <div class="container-login100">
+                         <div class="wrap-login100 p-t-15 p-b-20">
+				<form class="login100-form validate-form" method="post">
+					<span class="login100-form-title p-b-50">
+                                                 <font face="Impact">Welcome <br>Data Scientist</font>
+                                         </span>
+                                         <span class="login100-form-avatar">
+                                                {% load static %}
+                                                 <img src="{% static "images/python.png" %}" alt="AVATAR">
+                                         </span>
+
+					{% csrf_token %}
+					{% for field in form %}
+						<p>
+						{{ field.label_tag }}
+						<div class="wrap-input100 validate-input m-t-11 m-b-25">
+							{{ field }}
+						</div>
+<!--						{% if field.help_text %}
+						<font size="2"><small style="color: blue">{{ field.help_text }}</small></font>
+						{% endif %}-->
+						{% for error in field.errors %}
+							<p style="color: red">{{ error }}</p>
+							<!--{{ form.as_p }}-->
+						{% endfor %}
+					</p>
+					{% endfor %}
+					<button class="login100-form-btn" type="submit">Sign Up</button><br>
+				</form>
+			</div>
+		</div>
+</div>
+{% endblock %}
+
+{% load static %}
+        <script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+        <script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+        <script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+        <script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+        <script src="vendor/countdowntime/countdowntime.js"></script>
+        <script src="js/main.js"></script>
+
+</body>
+</html>

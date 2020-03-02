@@ -1,0 +1,57 @@
+{% extends 'cruds/base.html' %}
+
+{% block content %}
+{% block title %}Dijkstra-Form{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+</head>
+<body>
+
+	<form method="POST" class="post-form" action="/testapp/dij/">
+		{% csrf_token %}
+		<div class="container">
+			<br>
+			<div class="form-group row">
+				<label class="col-sm-1 col-form-label"></label>
+				<div class="col-sm-4">
+				<h3>Enter Region for Data Analysis</h3>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-1 col-form-label">Start from Gempol (KT) : </label>
+			<div class="col-sm-4">
+				{{ dijkform.reg1 }}
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-1 col-form-label">Kranji (KR) : </label>
+			<div class="col-sm-4">
+				{{ dijkform.reg2 }}
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-1 col-form-label">Mulia Business Park (MBP) : </label>
+			<div class="col-sm-4">
+				{{ dijkform.reg3 }}
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-1 col-form-label">End to Garuda Cendekia (GC) : </label>
+			<div class="col-sm-4">
+				{{ dijkform.reg4 }}
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-1 col-form-label"></label>
+			<div class="col-sm-4">
+				<button type="submit" class="btn btn-primary">Process Dijkstra</button>
+			</div>
+		</div>
+	</form>
+
+</body>
+</html>
+{% endblock content %}

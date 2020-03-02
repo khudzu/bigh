@@ -1,0 +1,13 @@
+{% extends 'cruds/base.html' %}
+
+<html>
+<title>Other Views</title>
+<body bgcolor='yellow'>
+
+{% block content %}
+	{{ bent }}
+
+
+{% endblock content %}
+</body>
+</html>

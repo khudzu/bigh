@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Employee Records</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}"/>
+</head>
+<body>
+	<table class="table table-striped table-bordered table-sm">
+		<thead class="thead-dark">
+			<tr>
+				<th>Employee ID</th>
+				<th>Employee Name</th>
+				<th>Employee Email</th>
+				<th>Employee Contact</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in users %}
+			<tr>
+				<td>{{ user.eid }}</td>
+				<td>{{ user.ename }}</td>
+				<td>{{ user.eemail }}</td>
+				<td>{{ user.econtact }}</td>
+				<td>
+					<a href="/testapp/edit/{{ user.id }}">
+						<span class="glyphicon glyphicon-pencil">Edit</span>
+					</a>
+					<a href="/testapp/destroy/{{ user.id }}">Delete</a>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<br>
+		{% if users.has_other_pages %}
+		<ul class="pagination pagination-lg">	
+			{% if users.has_previous %}
+				<li><a href="?page={{ users.previous_page_number }}"> Previous </a></li>
+			{% else %}
+				<li class="disabled"><span></span></li>
+			{% endif %}
+			{% for i in users.paginator.page_range %}
+				{% if users.number == i %}
+					<li class="active"><span>&nbsp {{ i }} &nbsp<span class="sr-only">(current)</span></span></li>
+				{% else %}
+					<li><a href="?page={{ i }}">&nbsp {{ i }} &nbsp</a></li>
+				{% endif %}
+			{% endfor %}
+			{% if users.has_next %}
+				<li><a href="?page={{ users.next_page_number }}"> Next </a></li>
+			{% else %}
+				<li class="disabled"><span> Next </span></li>
+			{% endif %}
+		</ul>
+		{% endif %}
+	<br>
+	<br>
+	<center><a href="/testapp/emp" class="btn btn-primary">Add New Record</a></center>
+</body>
+</html>

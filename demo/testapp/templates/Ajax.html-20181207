@@ -1,0 +1,33 @@
+ {% extends 'cruds/base.html' %}
+{% block content %}
+{% block title %}Django with AJAX{% endblock title %}
+<html>
+<head>
+	<title>
+		Disini AJAX
+	</title>
+	<script>
+		function sebutkanNama(nama){
+			window.alert("Hello "+nama);
+		}
+	</script>
+</head>
+<!--<body onclick="window.alert('Welcome tifosilinux')">-->
+<body>
+
+	<script language=javascript>	
+		document.write("Hello Data Scientist"+"<br/>"+"Welcome<br><br>");
+		document.write("Nama browser : <strong>" + navigator.appName + "</strong><br/>");
+		document.write("Versi browser : <strong>" + navigator.appVersion + "</strong><br/>");
+		document.write("Nama User Agent : <strong>" + navigator.userAgent + "</strong><br/><br/>");
+
+	</script>
+
+	<form>
+		<input type='text' id='teks'>
+		<input type='submit' value='say' onclick = sebutkanNama(teks.value)>
+	</form>
+
+</body>
+<html>
+{% endblock content %}

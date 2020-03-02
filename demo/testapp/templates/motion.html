@@ -1,0 +1,20 @@
+{% extends 'cruds/base.html' %}
+
+{% block title %}Python Vehicles Detection{% endblock title %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Python Vehicles Detection</title>
+</head>
+<body>
+
+{% load staticfiles %}
+<video height='500' width='530' controls>
+	<source src="{% static "upload/hary.mp4" type="video/mp4" %}"/>
+	Your browser does not support the video tag.
+</video>
+
+</body>
+</html>
+{% endblock content %}

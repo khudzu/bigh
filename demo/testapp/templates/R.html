@@ -1,0 +1,135 @@
+{% extends 'cruds/base.html' %}
+
+{% block content %}
+{% block title %}Django with R{% endblock %}
+<br>
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+	<img src='https://tifosilinux.files.wordpress.com/2018/12/R.jpg' height='90px' width='100px'/><br>
+	<!--- Pretty tab code --->
+	{% load staticfiles %}
+	<!--<link rel="stylesheet" type="text/css" href="{% static "sheels.css" %}" />-->
+</head>
+<body>
+
+<div class="row">
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3>{{ R3 }}</h3>
+                    <p>R Objects for pi</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-bag"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div><!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>{{ R5 }}</h3>
+                    <p>MEAN</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div><!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>{{ R6 }}</h3>
+                    <p>MEDIAN</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div><!-- ./col -->
+    </div>
+
+<!--	<pre>
+		{{ R }}
+
+		<br>
+	
+		{{ R2 }}		
+		
+		<br>-->
+<div class="row">
+<section class="col-lg-7 connectedSortable">
+            <!-- Custom tabs (Charts with tabs)-->
+            <div class="nav-tabs-custom">
+                <!-- Tabs within a box -->
+                <ul class="nav nav-tabs pull-right">
+                    <li><a href="#revenue-chart" data-toggle="tab">Area</a></li>
+                    <li class="active"><a href="#-chart" data-toggle="tab">Cars</a></li>
+                    <li class="pull-left header"><i class="fa fa-inbox"></i>Content of MTCars.csv (not from Dataset(mtcars))</li>
+                </ul>
+                <div class="tab-content no-padding">
+			<pre>{{ R4 }}</pre>
+                </div>
+            </div><!-- /.nav-tabs-custom -->		
+</section>
+
+<section class="col-lg-5 connectedSortable">
+
+            <!-- Map box -->
+            <div class="box box-solid bg-light-blue-gradient">
+                <div class="box-header">
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+                        <button class="btn btn-primary btn-sm pull-right" data-widget='collapse' data-toggle="tooltip" title="Collapse" style="margin-right: 5px;"><i class="fa fa-minus"></i></button>
+                    </div><!-- /. tools -->
+
+                    <i class="fa fa-map-marker"></i>
+                    <h3 class="box-title">
+                        Shapefile
+                    </h3>
+                </div>
+                <div class="box-body">
+			<img src="https://tifosilinux.files.wordpress.com/2018/12/RR.jpg" height='310px' width='490px'></img>
+<pre>
+> library('sf')
+Linking to GEOS 3.6.1, GDAL 2.2.3, PROJ 4.9.3
+> library('ggplot2')
+> shapeName <- read_sf('INDONESIA_KAB.shx')
+> ggplot(shapeName)+geom_sf()
+> 
+</pre>
+
+                </div><!-- /.box-body-->
+                <div class="box-footer no-border">
+                    <div class="row">
+                        <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                            <div id="sparkline-1"></div>
+                            <div class="knob-label">Map</div>
+                        </div><!-- ./col -->
+                        <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+                            <div id="sparkline-2"></div>
+                            <div class="knob-label">Of</div>
+                        </div><!-- ./col -->
+                        <div class="col-xs-4 text-center">
+                            <div id="sparkline-3"></div>
+                            <div class="knob-label">Indonesia</div>
+                        </div><!-- ./col -->
+                    </div><!-- /.row -->
+                </div>
+            </div>
+</section>
+
+</div>
+
+</body>
+
+{% endblock content %}
+</html>

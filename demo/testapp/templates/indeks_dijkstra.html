@@ -1,0 +1,56 @@
+{% extends 'cruds/base.html' %}
+
+{% block content %}
+{% block title %}Dikstra Algorithm{% endblock title %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+</head>
+<body>
+
+	<form method="POST" class="post-form" action="/testapp/dij/">
+		{% csrf_token %}
+		<div class="container">
+			<br>
+			<div class="form-group row">
+				<label class="col-sm-1 col-form-label"></label>
+				<div class="col-sm-4">
+				<h3>Enter Region for Data Analysis</h3>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-1 col-form-label">Start from Kranji: </label>
+			<input type="number" name="reg1"> km
+		</div>
+		
+	
+		<div class="form-group row">
+                	<label class="col-sm-1 col-form-label">End to Garuda Cendekia:  </label>
+			<input type="number" name="reg4"> km
+                </div>
+
+		<ul type=circle>
+			<li>Kranji (KR)</li>
+			<li>Gempol (KT)</li>
+			<li>Ps.Gembrong (GR)</li>
+			<li>Mulia Business Park (MBP)</li>
+			<li>Garuda Cendekia (GC)</li>
+		</ul>
+
+
+		<div class="form-group row">
+			<label class="col-sm-1 col-form-label"></label>
+			<div class="col-sm-4">
+				<button type="submit" class="btn btn-warning" value="DijkstraModel">Process Dijkstra</button>
+			</div>
+		</div>
+	</form>
+<hr>
+*) It will be going to through different alternative places to end point
+<br>
+{% load staticfiles %}
+<img src="{% static "network.png" %}" alt="Images Attached"/></body>
+</html>
+{% endblock content %}

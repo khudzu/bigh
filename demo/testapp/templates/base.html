@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %} Tifosilinux Authenticate Login {% endblock %}</title>
+  </head>
+  <body>
+    <header>
+        <p align="right">
+      {% if user.is_authenticated %}
+        <!--<a href="{% url 'logout' %}">logout</a>-->
+	<meta http-equiv="refresh" content="0;URL='http://192.168.75.145/'" />
+      {% else %}
+        <a href="{% url 'login' %}">Login</a> / <a href="{% url 'signup' %}">Signup</a>
+      {% endif %}
+        </p>
+      <hr>
+    </header>
+      {% block content %}
+      {% endblock %}
+    </main>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+{% extends 'cruds/base.html' %}
+
+{% block content %}
+{% block title %}Django with R{% endblock %}
+<br>
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+	<img src='https://tifosilinux.files.wordpress.com/2018/12/R.jpg' height='90px' width='100px'/><br>
+</head>
+<body>
+<!--	<pre>
+		{{ R }}
+
+		<br>
+	
+		{{ R2 }}		
+		
+		<br>-->
+		<u><h5>R objects for pi</h5></u>
+		<br>
+		{{ R3 }}
+		<br><br>
+	</pre>
+		<u><h5>Content of MTCars.csv (not from Dataset(mtcars))</h5></u>
+	<pre>
+		{{ R4 }}
+	</pre>
+		<br>
+		<u><h5>Looking for Mean</h5></u>
+	<pre>
+		{{ R5 }}
+	</pre>
+		<u><h5>Looking for Median</h5></u>
+	<pre>
+		{{ R6 }}
+	</pre>
+</body>
+
+{% endblock content %}
+</html>

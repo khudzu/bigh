@@ -1,0 +1,435 @@
+<!DOCTYPE html PUBLIC "-//W3C/DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+{% extends 'cruds/base.html' %}
+{% block content %}
+{% block title %}Django with AJAX{% endblock title %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>
+		Disini AJAX
+	</title>
+
+<style>
+.container {
+  margin-top:30px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Source Sans Pro';
+  font-weight:700;
+}
+
+.fancyTab {
+	text-align: center;
+  padding:15px 0;
+  background-color: #eee;
+	box-shadow: 0 0 0 1px #ddd;
+	top:15px;	
+  transition: top .2s;
+}
+
+.fancyTab.active {
+  top:0;
+  transition:top .2s;
+}
+
+.whiteBlock {
+  display:none;
+}
+
+.fancyTab.active .whiteBlock {
+  display:block;
+  height:2px;
+  bottom:-2px;
+  background-color:#fff;
+  width:99%;
+  position:absolute;
+  z-index:1;
+}
+
+.fancyTab a {
+	font-family: 'Source Sans Pro';
+	font-size:1.65em;
+	font-weight:300;
+  transition:.2s;
+  color:#333;
+}
+
+/*.fancyTab .hidden-xs {
+  white-space:nowrap;
+}*/
+
+.fancyTabs {
+	border-bottom:2px solid #ddd;
+  margin: 15px 0 0;
+}
+
+li.fancyTab a {
+  padding-top: 15px;
+  top:-15px;
+  padding-bottom:0;
+}
+
+li.fancyTab.active a {
+  padding-top: inherit;
+}
+
+.fancyTab .fa {
+  font-size: 40px;
+	width:100%;
+	padding: 15px 0 5px;
+  color:#666;
+}
+
+.fancyTab.active .fa {
+  color: #cfb87c;
+}
+
+.fancyTab a:focus {
+	outline:none;
+}
+
+.fancyTabContent {
+  border-color: transparent;
+  box-shadow: 0 -2px 0 -1px #fff, 0 0 0 1px #ddd;
+  padding: 30px 15px 15px;
+  position:relative;
+  background-color:#fff;
+}
+
+.nav-tabs > li.fancyTab.active > a, 
+.nav-tabs > li.fancyTab.active > a:focus,
+.nav-tabs > li.fancyTab.active > a:hover {
+	border-width:0;
+}
+
+.nav-tabs > li.fancyTab:hover {
+	background-color:#f9f9f9;
+	box-shadow: 0 0 0 1px #ddd;
+}
+
+.nav-tabs > li.fancyTab.active:hover {
+  background-color:#fff;
+  box-shadow: 1px 1px 0 1px #fff, 0 0px 0 1px #ddd, -1px 1px 0 0px #ddd inset;
+}
+
+.nav-tabs > li.fancyTab:hover a {
+	border-color:transparent;
+}
+
+.nav.nav-tabs .fancyTab a[data-toggle="tab"] {
+  background-color:transparent;
+  border-bottom:0;
+}
+
+.nav-tabs > li.fancyTab:hover a {
+  border-right: 1px solid transparent;
+}
+
+.nav-tabs > li.fancyTab > a {
+	margin-right:0;
+	border-top:0;
+  padding-bottom: 30px;
+  margin-bottom: -30px;
+}
+
+.nav-tabs > li.fancyTab {
+	margin-right:0;
+	margin-bottom:0;
+}
+
+.nav-tabs > li.fancyTab:last-child a {
+  border-right: 1px solid transparent;
+}
+
+.nav-tabs > li.fancyTab.active:last-child {
+  border-right: 0px solid #ddd;
+	box-shadow: 0px 2px 0 0px #fff, 0px 0px 0 1px #ddd;
+}
+
+.fancyTab:last-child {
+  box-shadow: 0 0 0 1px #ddd;
+}
+
+.tabs .nav-tabs li.fancyTab.active a {
+	box-shadow:none;
+  top:0;
+}
+
+
+.fancyTab.active {
+  background: #fff;
+	box-shadow: 1px 1px 0 1px #fff, 0 0px 0 1px #ddd, -1px 1px 0 0px #ddd inset;
+  padding-bottom:30px;
+}
+
+.arrow-down {
+	display:none;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 22px solid #ddd;
+  position: absolute;
+  top: -1px;
+  left: calc(50% - 20px);
+}
+
+.arrow-down-inner {
+  width: 0;
+  height: 0;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-top: 12px solid #fff;
+  position: absolute;
+  top: -22px;
+  left: -18px;
+}
+
+.fancyTab.active .arrow-down {
+  display: block;
+}
+
+@media (max-width: 1200px) {
+  
+  .fancyTab .fa {
+  	font-size: 36px;
+  }
+  
+  .fancyTab .hidden-xs {
+    font-size:22px;
+	}
+		
+}
+	
+	
+@media (max-width: 992px) {
+    
+  .fancyTab .fa {
+  	font-size: 33px;
+  }
+    
+  .fancyTab .hidden-xs {
+  	font-size:18px;
+    font-weight:normal;
+  }
+		
+}
+	
+	
+@media (max-width: 768px) {
+    
+  .fancyTab > a {
+    font-size:18px;
+  }
+    
+  .nav > li.fancyTab > a {
+    padding:15px 0;
+    margin-bottom:inherit;
+  }
+    
+  .fancyTab .fa {
+    font-size:30px;
+  }
+    
+  .nav-tabs > li.fancyTab > a {
+    border-right:1px solid transparent;
+    padding-bottom:0;
+  }
+    
+  .fancyTab.active .fa {
+    color: #333;
+	}
+		
+}
+</style>
+
+
+<script>
+$(document).ready(function() {
+  
+
+	  
+    var numItems = $('li.fancyTab').length;
+		
+	
+			  if (numItems == 12){
+					$("li.fancyTab").width('8.3%');
+				}
+			  if (numItems == 11){
+					$("li.fancyTab").width('9%');
+				}
+			  if (numItems == 10){
+					$("li.fancyTab").width('10%');
+				}
+			  if (numItems == 9){
+					$("li.fancyTab").width('11.1%');
+				}
+			  if (numItems == 8){
+					$("li.fancyTab").width('12.5%');
+				}
+			  if (numItems == 7){
+					$("li.fancyTab").width('14.2%');
+				}
+			  if (numItems == 6){
+					$("li.fancyTab").width('16.666666666666667%');
+				}
+			  if (numItems == 5){
+					$("li.fancyTab").width('20%');
+				}
+			  if (numItems == 4){
+					$("li.fancyTab").width('25%');
+				}
+			  if (numItems == 3){
+					$("li.fancyTab").width('33.3%');
+				}
+			  if (numItems == 2){
+					$("li.fancyTab").width('50%');
+				}
+		 
+	
+		});
+
+$(window).load(function() {
+
+  $('.fancyTabs').each(function() {
+
+    var highestBox = 0;
+    $('.fancyTab a', this).each(function() {
+
+      if ($(this).height() > highestBox)
+        highestBox = $(this).height();
+    });
+
+    $('.fancyTab a', this).height(highestBox);
+
+  });
+});
+</script>
+
+<!-------- Here we are code of AJAX ----------------->
+
+	<script language=javascript>
+		var objekXHR; // ini untuk deklarasi variabel objekXHR
+		var tipe=""; // untuk deklarasi tipe dan mengosongkannya
+
+		function buatobjekXHR(){
+			// fungsi untuk membuat objek XMLHttpRequest
+			if(window.ActiveXObject){
+				// Untuk IE
+				objekXHR = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			else if(window.XMLHttpRequest){
+				objekXHR = new XMLHttpRequest();
+			}
+			else{
+				alert("Ganti browser dengan yang support AJAX");
+			}
+		}
+
+		function cariJadwal(tipeJadwal){
+			/*Fungsi untuk mengambil jadwal dari server dan kemudian menampilkannya*/
+			/*Fungsi ini akan memangiil fungsi-fungsi lainnya*/
+			tipe = tipeJadwal;
+			buatobjekXHR();
+			objekXHR.onreadystatechange = pilihJenisJadwal;
+
+			// Berikut kode untk mengambil data dari file XML
+			{% load staticfiles %}
+			objekXHR.open("GET","{% static "data.xml" %}",true);
+			objekXHR.send(null);
+		}
+
+		function pilihJenisJadwal(){
+			/*Dekomposisi untuk melihat apakah tipe jadwal adalah keseluruhan atau hari tertentu*/
+			if(objekXHR.readyState == 4){
+				if(objekXHR.status == 200){
+					if(tipe == "senin"){
+						jadwalHarian("senin");
+					}
+					if(tipe == "selasa"){
+						jadwalHarian("selasa");
+					}
+					if(tipe == "rabu"){
+						jadwalHarian("rabu");
+					}
+					if(tipe == "kamis"){
+						jadwalHarian("kamis");
+					}
+					else if(tipe == "all"){
+						jadwalMingguan();
+					}
+				}
+			}
+		}
+	
+		function jadwalHarian(hari){
+			/*Fungsi ini untuk mem-parse data.xml guna menghasilkan data jadwal harian*/
+			var xmlDoc = objekXHR.responseXML;
+			var jadwalPerHari = xmlDoc.getElementsByTagName(hari)[0];
+			var detailPerHari = jadwalPerHari.getElementsByTagName("mapel");
+
+			// Kode untuk memanggil fungsi penjadwalan
+			tampilkanJadwal("<strong>Jadwal hari "+ hari +"</strong>",detailPerHari);
+		}
+
+		function jadwalMingguan(){
+			/*Fungsi ini untuk mem-parse data.xml guna menghasilkan data jadwal mingguan*/
+			var xmlDoc = objekXHR.responseXML;
+			var semuaPelajaran = xmlDoc.getElementsByTagName("mapel");
+			
+			tampilkanJadwal("<strong>Pelajaran satu minggu </strong>",semuaPelajaran);
+		}
+		
+		function tampilkanJadwal(namaHari,namaPelajaran){
+			// Menampilkan hasilnya di kotak DIV
+			var out = namaHari;
+			var pelajaran = null;
+
+			for(var i=0; i<namaPelajaran.length; i++){
+				pelajaran = namaPelajaran[i];
+				out = out + "<br />" + pelajaran.childNodes[0].nodeValue;
+			}
+			//alert(out);
+			document.getElementById('kotak').innerHTML=out;
+		}
+	</script>
+
+
+	<!--<script>
+		function sebutkanNama(nama){
+			window.alert("Hello "+nama);
+		}
+	</script>-->
+</head>
+<!--<body onclick="window.alert('Welcome tifosilinux')">-->
+<body>
+
+	<script language=javascript>	
+		document.write("Hello Data Scientist"+"<br/>"+"Welcome<br><br>");
+		document.write("Nama browser : <strong>" + navigator.appName + "</strong><br/>");
+		document.write("Versi browser : <strong>" + navigator.appVersion + "</strong><br/>");
+		document.write("Nama User Agent : <strong>" + navigator.userAgent + "</strong><br/><br/>");
+
+	</script>
+
+	<!--<form>
+		<input type='text' id='teks'>
+		<input type='submit' value='say' onclick = sebutkanNama(teks.value)>
+	</form>-->
+
+	<h1>Weekly Schedule :</h1>
+	<br/><br/>
+	<form action="#">
+		<input type="button" value="Jadwal semua hari" onclick="cariJadwal('all');"/>
+		<input type="button" value="Jadwal hari senin" onclick="cariJadwal('senin');"/>
+		<input type="button" value="Jadwal hari selasa" onclick="cariJadwal('selasa');"/>
+		<input type="button" value="Jadwal hari rabu" onclick="cariJadwal('rabu');"/>
+		<input type="button" value="Jadwal hari kamis" onclick="cariJadwal('kamis');"/>
+	</form>
+	<br/>
+	<div id="kotak"><!==ini untuk menampilkan jadwal==></div>
+
+</body>
+<html>
+{% endblock content %}

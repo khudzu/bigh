@@ -1,0 +1,68 @@
+{% extends 'cruds/base.html' %}
+{% block content %}
+
+<html>  
+      <head>  
+           <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+           <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>-->
+      </head>  
+      <body>  
+           <div class="container"> 
+		<h2 align="center">Dijkstra Algorithm</h2>
+                <h4 align="center">Shortest Path - Greedy Algorithm with Networkx Module</h4>
+		<hr>
+		Result by python3.4 /home/bigh/netting.py
+		<ul type=circle>
+			<li>Gempol (KT)</li>
+			<li>Kranji (KR)</li>
+			<li>Ps.Gembrong (GR)</li>
+			<li>Mulia Business Park (MBP)</li>
+			<li>Garuda Cendekia (GC)</li>
+		</ul>
+                <!--<div class="form-group">  
+                     <form name="add_name" id="add_name">  
+                          <div class="table-responsive">  
+                               <table class="table table-bordered" id="dynamic_field">  
+                                    <tr>  
+                                         <td><input type="text" name="name[]" placeholder="Vertex's Values" class="form-control name_list" size="1" /></td>  
+                                         <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>  
+                                    </tr>  
+                               </table>  
+                               <input type="button" name="submit" id="submit" class="btn btn-info" value="Proceed" />  
+                          </div>  
+                     </form>  
+                </div>  -->
+           </div>  
+      </body>  
+ </html>  
+ <script>  
+ $(document).ready(function(){  
+      var i=1;  
+      $('#add').click(function(){  
+           i++;  
+           $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="name[]" placeholder="Vertexs values" class="form-control name_list" size="1" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
+      });  
+      $(document).on('click', '.btn_remove', function(){  
+           var button_id = $(this).attr("id");   
+           $('#row'+button_id+'').remove();  
+      });  
+      $('#submit').click(function(){            
+           $.ajax({  
+                url:"name.php",  
+                method:"POST",  
+                data:$('#add_name').serialize(),  
+                success:function(data)  
+                {  
+                     alert(data);  
+                     $('#add_name')[0].reset();  
+                }  
+           });  
+      });  
+ });  
+ </script>
+
+{% load staticfiles %}
+<img src="{% static "network.png" %}" alt="Images Attached"/>
+
+{% endblock content %}

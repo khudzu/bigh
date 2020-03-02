@@ -1,0 +1,56 @@
+{% extends 'cruds/base.html' %}
+
+{% block content %}
+{% block title %}Pandas I/O, Bokeh and Matplotlib{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Bokeh Scatter Plots</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bokeh/1.0.1/bokeh.min.css" type="text/css"/>
+	</head>
+	<body>
+	<br><hr>
+	<form method="POST" class="post-form" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit" class="save btn btn-primary">Save</button>
+	</form>
+	<br>
+		<img src="data:image/png;base64,{{ htmllink }}" height="1010px" width="83%">
+	<br><hr>
+	<table>
+		<thead>
+			<tr>
+				<th>Python Bokeh</th>
+				<th>Plot</th>
+			</tr>
+		</thead>
+		<tfoot>
+		</tfoot>
+		<tbody>
+			<tr>
+				<td>
+					{{ div | safe }}
+				</td>
+				<td>
+					<img src='https://tifosilinux.files.wordpress.com/2018/11/matplotlib.png' height='70px' width='230px'/><br>
+					{% load staticfiles %}
+					<img src="{% static "adult.png" %}" alt="Images Attached"/>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	</body>
+		
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/bokeh/1.0.1/bokeh.min.js"></script>
+			{{ script | safe }}
+
+	<br>
+	<pre>
+		{{ grams }}
+	</pre>
+
+</html>
+{% endblock content %}

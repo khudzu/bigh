@@ -1,0 +1,146 @@
+{% extends 'cruds/base.html' %}
+
+{% block content %}
+{% block title %}Django Pandas{% endblock title %}
+<br>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Django Pandas</title>
+	<!--- Pretty tab code --->
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static "sheels.css" %}" />
+
+<script>
+$(document).ready(function() {
+	  
+    var numItems = $('li.fancyTab').length;
+	
+			  if (numItems == 12){
+					$("li.fancyTab").width('8.3%');
+				}
+			  if (numItems == 11){
+					$("li.fancyTab").width('9%');
+				}
+			  if (numItems == 10){
+					$("li.fancyTab").width('10%');
+				}
+			  if (numItems == 9){
+					$("li.fancyTab").width('11.1%');
+				}
+			  if (numItems == 8){
+					$("li.fancyTab").width('12.5%');
+				}
+			  if (numItems == 7){
+					$("li.fancyTab").width('14.2%');
+				}
+			  if (numItems == 6){
+					$("li.fancyTab").width('16.666666666666667%');
+				}
+			  if (numItems == 5){
+					$("li.fancyTab").width('20%');
+				}
+			  if (numItems == 4){
+					$("li.fancyTab").width('25%');
+				}
+			  if (numItems == 3){
+					$("li.fancyTab").width('33.3%');
+				}
+			  if (numItems == 2){
+					$("li.fancyTab").width('50%');
+				}
+		});
+
+$(window).load(function() {
+  $('.fancyTabs').each(function() {
+    var highestBox = 0;
+    $('.fancyTab a', this).each(function() {
+      if ($(this).height() > highestBox)
+        highestBox = $(this).height();
+    });
+    $('.fancyTab a', this).height(highestBox);
+  });
+});
+</script>
+
+</head>
+<body>
+<div class="container"> 
+<section id="fancyTabWidget" class="tabs t-tabs">
+        <ul class="nav nav-tabs fancyTabs" role="tablist">
+        
+                    <li class="tab fancyTab active">
+                    <div class="arrow-down"><div class="arrow-down-inner"></div></div>	
+                        <a id="tab0" href="#tabBody0" role="tab" aria-controls="tabBody0" aria-selected="true" data-toggle="tab" tabindex="0"><img src="https://tifosilinux.files.wordpress.com/2018/12/pandas-logo.png" height='60px' width='120px' /><br><span class="hidden-xs">Custom Pandas</span></a>
+                    	<div class="whiteBlock"></div>
+                    </li>
+                    
+                    <li class="tab fancyTab">
+                    <div class="arrow-down"><div class="arrow-down-inner"></div></div>
+                        <a id="tab1" href="#tabBody1" role="tab" aria-controls="tabBody1" aria-selected="true" data-toggle="tab" tabindex="0"><span class="fa fa-linux"></span><span class="hidden-xs">Random Pandas</span></a>
+                        <div class="whiteBlock"></div>
+                    </li>
+                    
+			<li class="tab fancyTab">
+			<div class="arrow-down"><div class="arrow-down-inner"></div></div>
+				<a id="tab2" href="#tabBody2" role="tab" aria-controls="tabBody2" aria-selected="true" data-toggle="tab" tabindex="0"><img src="https://tifosilinux.files.wordpress.com/2018/12/discover-logo.png" height='60px' width='60px' /><br><span class="hidden-xs">Basemap & GeoPandas</span></a>
+				<div class="whiteBlock"></div>
+			</li>
+                    
+                    <li class="tab fancyTab">
+                    <div class="arrow-down"><div class="arrow-down-inner"></div></div>
+                        <a id="tab3" href="#tabBody3" role="tab" aria-controls="tabBody3" aria-selected="true" data-toggle="tab" tabindex="0"><img src="https://tifosilinux.files.wordpress.com/2019/01/2000px-opencv_logo_with_text_svg_version.svg_.png" height='60px' width='65px' /><br></span><span class="hidden-xs">Analytic Traff.</span></a>
+                        <div class="whiteBlock"></div>
+                    </li> 
+        </ul>
+        <div id="myTabContent" class="tab-content fancyTabContent" aria-live="polite">
+                    <div class="tab-pane  fade active in" id="tabBody0" role="tabpanel" aria-labelledby="tab0" aria-hidden="false" tabindex="0">
+                        <div>
+                        	<div class="row">
+                            	
+                                <div class="col-md-12">
+					<img src="data:image/png;base64,{{ supplier }}" height="505px" width="850px">
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane  fade" id="tabBody1" role="tabpanel" aria-labelledby="tab1" aria-hidden="true" tabindex="0">
+                        <div class="row">
+                            	
+                                <div class="col-md-12">
+					{% load staticfiles %}
+					<img src="{% static "pie.png" %}" alt="Images Attached"/>
+					<img src="{% static "plot.png" %}" alt="Images Attached"/>
+					<br/>
+					<img src="{% static "nolegend.png" %}" alt="Images Attached"/>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="tab-pane  fade" id="tabBody2" role="tabpanel" aria-labelledby="tab2" aria-hidden="true" tabindex="0">
+                        <div class="row">
+                                <div class="col-md-12">
+					<h4>BASED ON HISTORICAL AP (ACCOUNT PAYABLE) LOCATION IN INDONESIA</h4><br/>
+KABUPATEN
+					<img src="data:image/png;base64,{{ bm }}" height="505px" width="850px"><br/>
+KOTA
+					<img src="data:image/png;base64,{{ bn }}" height="505px" width="850px">
+                                </div>
+                            </div>
+                    </div>
+                    <div class="tab-pane  fade" id="tabBody3" role="tabpanel" aria-labelledby="tab3" aria-hidden="true" tabindex="0">
+	                    <div class="row">
+        	                <div class="col-md-12">
+					{% load staticfiles %}
+                                        <img src="{% static "traf.png" %}" alt="Images Attached"/>
+                                </div>
+                            </div>
+                    </div>
+        </div>
+
+    </section>
+</div>
+</body>
+
+
+{% endblock content %}
+</html>

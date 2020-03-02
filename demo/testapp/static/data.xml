@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jadwal>
+	<senin>
+		<mapel>Matematika</mapel>
+		<mapel>Fisika</mapel>
+		<mapel>Kimia</mapel>
+	</senin>
+	<selasa>
+		<mapel>Algoritma Pemrograman</mapel>
+		<mapel>Linux</mapel>
+		<mapel>OOP</mapel>
+		<mapel>Database</mapel>
+	</selasa>
+	<rabu>
+		<mapel>Bahasa Inggris</mapel>
+		<mapel>Bahasa Perancis</mapel>
+		<mapel>Bahasa Arab</mapel>
+	</rabu>
+	<kamis>
+		<mapel>Olahraga</mapel>
+		<mapel>Kesenian</mapel>
+		<mapel>Liqo'</mapel>
+	</kamis>
+</jadwal>
